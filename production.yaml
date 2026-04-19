@@ -64,7 +64,7 @@ spec:
       containers:
       - name: backend
         # CHANGE THIS TO YOUR DOCKER HUB IMAGE
-        image: mavles31/fullstackbackend:v1
+        image: mavles31/fullstackbackend:v2
         env:
         - name: DB_HOST
           value: db
