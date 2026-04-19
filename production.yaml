@@ -1,0 +1,113 @@
+# 1. DATABASE TIER (MySQL)
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root_super_secret_password
+        - name: MYSQL_DATABASE
+          value: production_db
+        - name: MYSQL_USER
+          value: app_user
+        - name: MYSQL_PASSWORD
+          value: app_secure_password
+---
+# 2. BACKEND TIER (Python)
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        # CHANGE THIS TO YOUR DOCKER HUB IMAGE
+        image: yourdockerhubusername/mavles-backend:latest 
+        env:
+        - name: DB_HOST
+          value: db
+        - name: DB_USER
+          value: app_user
+        - name: DB_PASSWORD
+          value: app_secure_password
+        - name: DB_NAME
+          value: production_db
+        - name: GOOGLE_CLIENT_ID
+          value: your_client_id_here
+---
+# 3. FRONTEND TIER (React + Nginx)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  # LoadBalancer tells K3s to expose this directly to your EC2 Public IP!
+  type: LoadBalancer 
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        # CHANGE THIS TO YOUR DOCKER HUB IMAGE
+        image: yourdockerhubusername/mavles-frontend:latest 
+        ports:
+        - containerPort: 80
