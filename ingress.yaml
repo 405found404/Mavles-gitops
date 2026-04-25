@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - app.yourdomain.com  # <-- CHANGE THIS to your actual domain
+    - app.mavss.co.in # <-- CHANGE THIS to your actual domain
     secretName: app-tls-secret
   rules:
-  - host: app.yourdomain.com  # <-- CHANGE THIS to your actual domain
+  - host: app.mavss.co.in  # <-- CHANGE THIS to your actual domain
     http:
       paths:
       - path: /
