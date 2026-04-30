@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables
+.env
+.env.*
+
+# Mac system files
+.DS_Store
+
+# Vite cache
+.vite/
+
+# OS generated files
+Thumbs.db
+
+# Docker build artifacts
+*.tar
+
+# Ignore local config
+.vscode/
+
+# Ignore coverage
+coverage/
+
+# Ignore frontend Dockerfile in src (if not needed in repo)
+frontend/src/Dockerfile
