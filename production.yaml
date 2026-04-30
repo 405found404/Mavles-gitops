@@ -108,6 +108,6 @@ spec:
       containers:
       - name: frontend
         # CHANGE THIS TO YOUR DOCKER HUB IMAGE
-        image: mavles31/fullstackfrontend:v3
+        image: mavles31/fullstackfrontend:v5
         ports:
         - containerPort: 80
