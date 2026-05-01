@@ -3,14 +3,9 @@ kind: Ingress
 metadata:
   name: app-ingress
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    kubernetes.io/ingress.class: "traefik"  # <-- CHANGE TO TRAEFIK
+    kubernetes.io/ingress.class: "traefik"
 spec:
-  ingressClassName: "traefik"               # <-- CHANGE TO TRAEFIK
-  tls:
-  - hosts:
-    - app.mavss.co.in
-    secretName: app-tls-secret
+  ingressClassName: "traefik"
   rules:
   - host: app.mavss.co.in
     http:
@@ -21,4 +16,4 @@ spec:
           service:
             name: frontend
             port:
-              number: 80   # Change this if your frontend service uses a different port
+              number: 80
