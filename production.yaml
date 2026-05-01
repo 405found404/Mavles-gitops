@@ -28,13 +28,13 @@ spec:
         image: mysql:8.0
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: root_super_secret_password
+          value: MvlsRootSecurePass2024_K7xL9Qm3nP@2vR
         - name: MYSQL_DATABASE
-          value: production_db
+          value: mavles_production_db
         - name: MYSQL_USER
-          value: app_user
+          value: mavles_app_user
         - name: MYSQL_PASSWORD
-          value: app_secure_password
+          value: MvlsSecureAppPass2024_K9xL2Qm8nP@7vR
 ---
 # 2. BACKEND TIER (Python)
 apiVersion: v1
@@ -69,13 +69,13 @@ spec:
         - name: DB_HOST
           value: db
         - name: DB_USER
-          value: app_user
+          value: mavles_app_user
         - name: DB_PASSWORD
-          value: app_secure_password
+          value: MvlsSecureAppPass2024_K9xL2Qm8nP@7vR
         - name: DB_NAME
-          value: production_db
+          value: mavles_production_db
         - name: GOOGLE_CLIENT_ID
-          value: your_client_id_here
+          value: 45231532521-k1s9ogi5jkhv498io6obtl3lfu3harpi.apps.googleusercontent.com
 ---
 # 3. FRONTEND TIER (React + Nginx)
 apiVersion: v1
@@ -108,6 +108,6 @@ spec:
       containers:
       - name: frontend
         # CHANGE THIS TO YOUR DOCKER HUB IMAGE
-        image: mavles31/fullstackfrontend:v6
+        image: mavles31/fullstackfrontend:v10
         ports:
         - containerPort: 80
